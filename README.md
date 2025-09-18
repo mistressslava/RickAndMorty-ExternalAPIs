@@ -1,1 +1,1 @@
-# RickAndMorty-RestAPI
+# RickAndMorty-ExternalAPIs
