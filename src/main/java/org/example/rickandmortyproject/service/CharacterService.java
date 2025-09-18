@@ -40,4 +40,12 @@ public class CharacterService {
                 .body(MultiCharacter.class)
                 .results();
     }
+
+    public int getNumberOfLivingSpecies(String species) {
+        return restClient.get()
+                .uri("/character?status=alive&species={species}", species)
+                .retrieve()
+                .body(MultiCharacter.class)
+                .info().count();
+    }
 }

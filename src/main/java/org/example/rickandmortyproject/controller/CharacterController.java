@@ -30,4 +30,9 @@ public class CharacterController {
     public List<CharacterData> getCharactersByStatus(@RequestParam String status) {
         return service.getCharactersByStatus(status);
     }
+
+    @GetMapping(value = "species-statistic", params = "species")
+    public int getNumberOfLivingSpecies(@RequestParam String species) {
+        return service.getNumberOfLivingSpecies(species);
+    }
 }
