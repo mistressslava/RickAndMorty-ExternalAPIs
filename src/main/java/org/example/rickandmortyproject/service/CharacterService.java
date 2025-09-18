@@ -8,20 +8,34 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 
 @Service
-public class RickAndMortyService {
+public class CharacterService {
 
     private final RestClient restClient;
 
-    public RickAndMortyService(RestClient.Builder restClientBuilder) {
+    public CharacterService(RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder
                 .baseUrl("https://rickandmortyapi.com/api")
                 .build();
     }
 
-
     public List<CharacterData> getAllCharacters() {
         return restClient.get()
                 .uri("/character")
+                .retrieve()
+                .body(MultiCharacter.class)
+                .results();
+    }
+
+    public CharacterData getCharacterById(String id) {
+        return restClient.get()
+                .uri("/character/{id}", id)
+                .retrieve()
+                .body(CharacterData.class);
+    }
+
+    public List<CharacterData> getCharactersByStatus(String status) {
+        return restClient.get()
+                .uri("/character?status={status}", status)
                 .retrieve()
                 .body(MultiCharacter.class)
                 .results();
